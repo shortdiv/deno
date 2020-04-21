@@ -1017,6 +1017,25 @@ declare namespace Deno {
    *       const reader = new Deno.Buffer(myData.buffer as ArrayBuffer);
    *       const bufferContent = Deno.readAllSync(reader);
    */
+  export function readAllSync(r: SyncReader, options: { encoding: "utf8" }): string;
+
+  /** Synchronously reads Reader `r` until end of file (`Deno.EOF`) and returns
+   * the content as `Uint8Array`.
+   *
+   *       //Example from stdin
+   *       const stdinContent = Deno.readAllSync(Deno.stdin);
+   *
+   *       //Example from file
+   *       const file = Deno.openSync("my_file.txt", {read: true});
+   *       const myFileContent = Deno.readAllSync(file);
+   *       Deno.close(file.rid);
+   *
+   *       //Example from buffer
+   *       const myData = new Uint8Array(100);
+   *       // ... fill myData array with data
+   *       const reader = new Deno.Buffer(myData.buffer as ArrayBuffer);
+   *       const bufferContent = Deno.readAllSync(reader);
+   */
   export function readAllSync(r: SyncReader): Uint8Array;
 
   /** Write all the content of the array buffer (`arr`) to the writer (`w`).
@@ -1345,7 +1364,18 @@ declare namespace Deno {
    *       console.log(decoder.decode(data));
    *
    * Requires `allow-read` permission. */
-  export function readFileSync(path: string): Uint8Array;
+  export function readFileSync(path: string, options: { encoding: "utf8" }): string;
+
+  /** Synchronously reads and returns the entire contents of a file as an array
+   * of bytes. `TextDecoder` can be used to transform the bytes to string if
+   * required.  Reading a directory returns an empty data array.
+   *
+   *       const decoder = new TextDecoder("utf-8");
+   *       const data = Deno.readFileSync("hello.txt");
+   *       console.log(decoder.decode(data));
+   *
+   * Requires `allow-read` permission. */
+  export function readFileSync(path: string, options?: {}): Uint8Array;
 
   /** Reads and resolves to the entire contents of a file as an array of bytes.
    * `TextDecoder` can be used to transform the bytes to string if required.

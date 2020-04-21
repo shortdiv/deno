@@ -206,9 +206,15 @@ export async function readAll(r: Reader): Promise<Uint8Array> {
   return buf.bytes();
 }
 
-export function readAllSync(r: SyncReader): Uint8Array {
+export function readAllSync(r: SyncReader, options?: { encoding: "utf8" }): string;
+export function readAllSync(r: SyncReader, options?: {}): Uint8Array;
+
+export function readAllSync(r: SyncReader, options?: {}): Uint8Array | string {
   const buf = new Buffer();
   buf.readFromSync(r);
+  if (options) {
+    return buf.toString()
+  }
   return buf.bytes();
 }
 

@@ -10,6 +10,12 @@ unitTest({ perms: { read: true } }, function readFileSyncSuccess(): void {
   assertEquals(pkg.name, "deno");
 });
 
+unitTest({ perms: { read: true } }, function readFileSyncUtf8(): void {
+  const data = Deno.readFileSync("cli/tests/fixture.json", { encoding: "utf8" });
+  const pkg = JSON.parse(data);
+  assertEquals(pkg.name, "deno");
+});
+
 unitTest({ perms: { read: false } }, function readFileSyncPerm(): void {
   let caughtError = false;
   try {
