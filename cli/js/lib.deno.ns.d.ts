@@ -1674,6 +1674,7 @@ declare namespace Deno {
     create?: boolean;
     /** Permissions always applied to file. */
     mode?: number;
+    encoding?: string;
   }
 
   /** Synchronously write `data` to the given `path`, by default creating a new
@@ -1691,7 +1692,7 @@ declare namespace Deno {
    */
   export function writeFileSync(
     path: string,
-    data: Uint8Array,
+    data: Uint8Array | string,
     options?: WriteFileOptions
   ): void;
 

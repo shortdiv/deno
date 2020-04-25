@@ -15,6 +15,16 @@ unitTest(
   }
 );
 
+unitTest(
+  { perms: { read: true, write: true } },
+  function writeFileSyncUtf8(): void {
+    const filename = Deno.makeTempDirSync() + "/test.txt";
+    Deno.writeFileSync(filename, "Hello", { encoding: "utf8" });
+    const dataRead = Deno.readFileSync(filename, { encoding: "utf8" });
+    assertEquals("Hello", dataRead);
+  }
+);
+
 unitTest({ perms: { write: true } }, function writeFileSyncFail(): void {
   const enc = new TextEncoder();
   const data = enc.encode("Hello");
