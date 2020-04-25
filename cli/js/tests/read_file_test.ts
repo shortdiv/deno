@@ -51,6 +51,15 @@ unitTest({ perms: { read: true } }, async function readFileSuccess(): Promise<
   assertEquals(pkg.name, "deno");
 });
 
+unitTest({ perms: { read: true } }, async function readFileUtf8(): Promise<
+  void
+> {
+  const data = await Deno.readFile("cli/tests/fixture.json", { encoding: "utf8" });
+  assert(typeof data == "string");
+  const pkg = JSON.parse(data);
+  assertEquals(pkg.name, "deno");
+});
+
 unitTest({ perms: { read: false } }, async function readFilePerm(): Promise<
   void
 > {

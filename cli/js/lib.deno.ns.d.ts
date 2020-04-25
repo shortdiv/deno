@@ -982,6 +982,20 @@ declare namespace Deno {
   }
 
   /** Read Reader `r` until end of file (`Deno.EOF`) and resolve to the content
+   * as `string`.
+   *
+   *       // Example from stdin
+   *       const stdinContent = await Deno.readAll(Deno.stdin, { encoding: "utf8" });
+   *
+   *       // Example from file
+   *       const file = await Deno.open("my_file.txt", {read: true});
+   *       const myFileContent = await Deno.readAll(file, { encoding: "utf8" });
+   *       Deno.close(file.rid);
+   *
+   */
+  export function readAll(r: Reader, options: { encoding: "utf8" }): Promise<string>;
+
+  /** Read Reader `r` until end of file (`Deno.EOF`) and resolve to the content
    * as `Uint8Array`.
    *
    *       // Example from stdin
@@ -1386,7 +1400,18 @@ declare namespace Deno {
    *       console.log(decoder.decode(data));
    *
    * Requires `allow-read` permission. */
-  export function readFile(path: string): Promise<Uint8Array>;
+  export function readFile(path: string, options: { encoding: "utf8" }): Promise<string>;
+
+  /** Reads and resolves to the entire contents of a file as an array of bytes.
+   * `TextDecoder` can be used to transform the bytes to string if required.
+   * Reading a directory returns an empty data array.
+   *
+   *       const decoder = new TextDecoder("utf-8");
+   *       const data = await Deno.readFile("hello.txt");
+   *       console.log(decoder.decode(data));
+   *
+   * Requires `allow-read` permission. */
+  export function readFile(path: string, options?: {}): Promise<Uint8Array>;
 
   /** A FileInfo describes a file and is returned by `stat`, `lstat`,
    * `statSync`, `lstatSync`. */

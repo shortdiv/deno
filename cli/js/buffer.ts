@@ -200,9 +200,15 @@ export class Buffer implements Reader, SyncReader, Writer, SyncWriter {
   }
 }
 
-export async function readAll(r: Reader): Promise<Uint8Array> {
+export async function readAll(r: Reader, options?: { encoding: "utf8" }): Promise<string>;
+export async function readAll(r: Reader, options?: {}):Promise<Uint8Array>;
+
+export async function readAll(r: Reader, options?: {}): Promise<Uint8Array | string> {
   const buf = new Buffer();
   await buf.readFrom(r);
+  if (options) {
+    return buf.toString()
+  }
   return buf.bytes();
 }
 
