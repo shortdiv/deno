@@ -38,9 +38,7 @@ export function writeFileSync(
     chmodSync(path, options.mode);
   }
 
-  if (
-    typeof data == "string"
-  ) {
+  if (typeof data == "string") {
     const enc = new TextEncoder();
     data = enc.encode(data);
   }
@@ -74,9 +72,7 @@ export async function writeFile(
     await chmod(path, options.mode);
   }
 
-  if (
-    typeof data == "string"
-  ) {
+  if (typeof data == "string") {
     const enc = new TextEncoder();
     data = enc.encode(data);
   }

@@ -11,7 +11,9 @@ unitTest({ perms: { read: true } }, function readFileSyncSuccess(): void {
 });
 
 unitTest({ perms: { read: true } }, function readFileSyncUtf8(): void {
-  const data = Deno.readFileSync("cli/tests/fixture.json", { encoding: "utf8" });
+  const data = Deno.readFileSync("cli/tests/fixture.json", {
+    encoding: "utf8",
+  });
   const pkg = JSON.parse(data);
   assertEquals(pkg.name, "deno");
 });
@@ -54,7 +56,9 @@ unitTest({ perms: { read: true } }, async function readFileSuccess(): Promise<
 unitTest({ perms: { read: true } }, async function readFileUtf8(): Promise<
   void
 > {
-  const data = await Deno.readFile("cli/tests/fixture.json", { encoding: "utf8" });
+  const data = await Deno.readFile("cli/tests/fixture.json", {
+    encoding: "utf8",
+  });
   assert(typeof data == "string");
   const pkg = JSON.parse(data);
   assertEquals(pkg.name, "deno");

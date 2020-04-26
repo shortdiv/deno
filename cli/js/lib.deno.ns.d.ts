@@ -993,7 +993,10 @@ declare namespace Deno {
    *       Deno.close(file.rid);
    *
    */
-  export function readAll(r: Reader, options: { encoding: "utf8" }): Promise<string>;
+  export function readAll(
+    r: Reader,
+    options: { encoding: "utf8" }
+  ): Promise<string>;
 
   /** Read Reader `r` until end of file (`Deno.EOF`) and resolve to the content
    * as `Uint8Array`.
@@ -1031,7 +1034,10 @@ declare namespace Deno {
    *       const reader = new Deno.Buffer(myData.buffer as ArrayBuffer);
    *       const bufferContent = Deno.readAllSync(reader);
    */
-  export function readAllSync(r: SyncReader, options: { encoding: "utf8" }): string;
+  export function readAllSync(
+    r: SyncReader,
+    options: { encoding: "utf8" }
+  ): string;
 
   /** Synchronously reads Reader `r` until end of file (`Deno.EOF`) and returns
    * the content as `Uint8Array`.
@@ -1378,7 +1384,10 @@ declare namespace Deno {
    *       console.log(decoder.decode(data));
    *
    * Requires `allow-read` permission. */
-  export function readFileSync(path: string, options: { encoding: "utf8" }): string;
+  export function readFileSync(
+    path: string,
+    options: { encoding: "utf8" }
+  ): string;
 
   /** Synchronously reads and returns the entire contents of a file as an array
    * of bytes. `TextDecoder` can be used to transform the bytes to string if
@@ -1400,7 +1409,10 @@ declare namespace Deno {
    *       console.log(decoder.decode(data));
    *
    * Requires `allow-read` permission. */
-  export function readFile(path: string, options: { encoding: "utf8" }): Promise<string>;
+  export function readFile(
+    path: string,
+    options: { encoding: "utf8" }
+  ): Promise<string>;
 
   /** Reads and resolves to the entire contents of a file as an array of bytes.
    * `TextDecoder` can be used to transform the bytes to string if required.
