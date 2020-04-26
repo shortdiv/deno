@@ -137,6 +137,16 @@ unitTest(
 
 unitTest(
   { perms: { read: true, write: true } },
+  async function writeFileUtf8Success(): Promise<void> {
+    const filename = Deno.makeTempDirSync() + "/test.txt";
+    await Deno.writeFile(filename, "Hello", { encoding: "utf8" });
+    const dataRead = Deno.readFileSync(filename, { encoding: "utf8" });
+    assertEquals("Hello", dataRead);
+  }
+);
+
+unitTest(
+  { perms: { read: true, write: true } },
   async function writeFileNotFound(): Promise<void> {
     const enc = new TextEncoder();
     const data = enc.encode("Hello");

@@ -1710,7 +1710,7 @@ declare namespace Deno {
    */
   export function writeFile(
     path: string,
-    data: Uint8Array,
+    data: Uint8Array | string,
     options?: WriteFileOptions
   ): Promise<void>;
 
